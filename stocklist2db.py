@@ -11,12 +11,23 @@ import MySQLdb
 
 #reload(sys)
 #sys.setdefaultencoding('utf-8')
-
+conn=MySQLdb.connect(host='localhost',user='root',passwd='bbac2015',db='stocks'
+                     ,port=3306,charset='utf8')
+cur=conn.cursor()
 
 def main():
-    conn=MySQLdb.connect(host='localhost',user='root',passwd='bbac2015',db='stocks'
-,port=3306,charset='utf8')
-    cur=conn.cursor()
+    cur.execute("Create TABLE IF not EXISTS stocklist(\
+    id char(6) UNIQUE,\
+    name char(16) ,\
+    amount_10000 int(11),\
+    stock_link char(255),\
+    xjllb_ncols int(11),\
+    xjllb_data text,\
+    zcfzb_ncols int(11),\
+    zcfzb_data text,\
+    lrb_ncols int(11),\
+    lrb_data text)")
+    conn.commit()
     cur.execute('truncate stocklist')
     conn.commit()
     url=("http://quote.eastmoney.com/stocklist.html")
