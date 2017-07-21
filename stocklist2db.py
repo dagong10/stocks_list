@@ -26,7 +26,12 @@ def main():
     zcfzb_ncols int(11),\
     zcfzb_data text,\
     lrb_ncols int(11),\
-    lrb_data text)")
+    lrb_data text),\
+    A_PRICE float(6,3),\
+    EBIT_PRICE float(6,3),\
+    NCF_PRICE float(6,3),\
+    CLEARING_PRICE float(6,3)              
+    ")
     conn.commit()
     cur.execute('truncate stocklist')
     conn.commit()
@@ -40,9 +45,9 @@ def main():
         name_number=rr[i].string
         number=name_number[-7:-1]
         name=name_number[:-8]
-        value=[number,name,0,'',0,'',0,'',0,'']
+        value=[number,name,0,'',0,'',0,'',0,'',0,0,0]
         print value
-        cur.execute('insert into stocklist values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',value)
+        cur.execute('insert into stocklist values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',value)
     conn.commit()
     cur.close()
     conn.close()
